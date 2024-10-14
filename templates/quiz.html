@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .quiz-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            background-color: rgb(216, 208, 208);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+        }
+        h1, h2 {
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-wrapper">
+        <div class="quiz-container">
+            <h1 class="text-center">Quiz</h1>
+            <h2 class="text-center">Nível: {{ level }}</h2>
+            <form action="{{ url_for('submit') }}" method="post">
+                {% for item in quiz_data %}
+                    <div class="form-group">
+                        <label class="font-weight-bold">{{ item.question }}</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question-{{ loop.index0 }}" value="correct" required>
+                            <label class="form-check-label">Correto</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question-{{ loop.index0 }}" value="wrong">
+                            <label class="form-check-label">Errado</label>
+                        </div>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
